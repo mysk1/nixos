@@ -1,6 +1,6 @@
 
 {
-  config, pkgs, ...
+  config, pkgs, sources, ...
 }:
 let
   glide-bin-unwrapped = pkgs.callPackage ./glide.nix {};
@@ -11,11 +11,7 @@ let
     sha256 = "0x126xqaw6vqz27sp0w1vl58a90whrs9y7nsa1hkvr150y8j2m0w";
   }) { system = "x86_64-linux"; };
 
-  hjem-src = builtins.fetchTarball {
-    url = "https://github.com/feel-co/hjem/archive/main.tar.gz";
-  };
-
-  hjem = import hjem-src {};
+  hjem = import sources.hjem { };
 in
   {
 
