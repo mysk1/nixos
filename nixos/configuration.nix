@@ -3,7 +3,7 @@
   config, pkgs, sources, ...
 }:
 let
-  glide-bin-unwrapped = pkgs.callPackage ./glide.nix {};
+  glide-bin-unwrapped = pkgs.callPackage "${sources.glide}/package.nix" {};
   glide = pkgs.wrapFirefox glide-bin-unwrapped {};
 
   unstable = import (builtins.fetchTarball {

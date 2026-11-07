@@ -1,5 +1,18 @@
 {
   "pins": {
+    "glide": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "glide-browser",
+        "repo": "glide.nix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "d5725b07982374282336e29c9aa17157e477e5c8",
+      "url": "https://github.com/glide-browser/glide.nix/archive/d5725b07982374282336e29c9aa17157e477e5c8.tar.gz",
+      "hash": "sha256-e4MNi8eB64VPnCRAcDziSSFdyVOzpgi4vPa6Tbc8ii8="
+    },
     "hjem": {
       "type": "Git",
       "repository": {
