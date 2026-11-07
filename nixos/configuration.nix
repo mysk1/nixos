@@ -16,12 +16,11 @@ in
   {
 
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       hjem.nixosModules.default
     ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -30,20 +29,8 @@ in
     "amdgpu.dcdebugmask=0x450"
   ];
 
-  #  boot.blacklistedKernelModules = [ "nouveau" ];
-  #  boot.extraModprobeConfig = ''
-  #    blacklist nouveau
-  #    options nouveau modeset=0
-  #  '';
-
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
   hardware.bluetooth = {
@@ -59,10 +46,9 @@ in
       };
     };
   };
-  # Time zone
+
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -82,7 +68,7 @@ in
   
   # Niri
   programs.niri.enable = true;
-  programs.dms-shell.enable = true;
+  programs.dux-shell.enable = true;
 
   programs.fish.enable = true;
   services.upower.enable = true;
@@ -100,18 +86,13 @@ in
   services.tailscale.enable = true;
   networking.firewall.allowedUDPPorts = [ 41641 ];
 
-  #systemd.user.services.niri.enableDefaultPath = true;
-
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -119,7 +100,6 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    #media-session.enable = true;
   };
 
   services.jack = {
@@ -156,16 +136,16 @@ in
     npins
 
 	# editor
-     neovim
-     vscode
-     emacs-pgtk
+    neovim
+    vscode
+    emacs-pgtk
 
-     direnv
-     nix-direnv
+    direnv
+    nix-direnv
 
-     ripgrep
-     coreutils
-     zsh-autosuggestions
+    ripgrep
+    coreutils
+    zsh-autosuggestions
 
   # niri
     alacritty
@@ -188,31 +168,32 @@ in
 
     unzip
 
+    glide
+
 	# social
-     discord
-     vesktop
+    discord
+    vesktop
 
 	# notes
-     obsidian
-     libreoffice
+    obsidian
+    libreoffice
 
 	# gaming
-     prismlauncher
+    prismlauncher
 
   # gamedev
     godot
 
   # editing
-     gimp
+    gimp
 
   #music
-     nicotine-plus
-     kew
-     feishin
-     glide
+    nicotine-plus
+    kew
+    feishin
+
 	# etc
-     reaper
-     texlive.combined.scheme-full
+    texliveSmall
 
   # school
     kicad
@@ -226,31 +207,5 @@ in
      julia-mono
 ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "26.05"; # Did you read the comment?
-
+  system.stateVersion = "26.05";
 }

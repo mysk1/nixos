@@ -10,12 +10,15 @@
   dbus-glib,
   gtk3,
   libxtst,
+  ffmpeg_9,
   libva,
   pciutils,
   pipewire,
   adwaita-icon-theme,
   writeText,
   patchelfUnstable, # have to use patchelfUnstable to support --no-clobber-old-sections
+  applicationName ? "Glide",
+  nix-update-script,
 }:
 
 let
@@ -79,36 +82,37 @@ stdenv.mkDerivation {
     runHook preInstall
 
     mkdir -p $prefix/lib $out/bin
-    cp -r . $prefix/lib/glide-bin-${version}
-    ln -s $prefix/lib/glide-bin-${version}/glide-bin $out/bin/${binaryName}
+    cp -r . $prefix/lib/glide-browser-bin-${version}
+
+    ln -s $prefix/lib/glide-browser-bin-${version}/glide $out/bin/${binaryName}
+
     # See: https://github.com/mozilla/policy-templates/blob/master/README.md
-    # mv $out/lib/glide-bin-${version}/distribution/policies.json $out/lib/glide-bin-${version}/distribution/extra-policies.json
-    ${lib.optionalString (config.librewolf.policies or false) ''
-      ln -s ${policiesJson} $out/lib/glide-bin-${version}/distribution/policies.json
-    ''}
+    mkdir -p $out/lib/glide-browser-bin-${version}/distribution/
+    ln -s ${policiesJson} $out/lib/glide-browser-bin-${version}/distribution/policies.json
 
     runHook postInstall
   '';
 
-  passthru = {
+    passthru = {
     inherit binaryName;
-    applicationName = "Glide";
-    libName = "glide-bin-${version}";
-    ffmpegSupport = true;
-    gssSupport = true;
-    gtk3 = gtk3;
-    updateScript = ./update.sh;
+    inherit applicationName;
+    libName = "glide-browser-bin-${version}";
+    ffmpegPackage = ffmpeg_9;
+    withFFmpeg = true;
+    withGSSAPI = true;
+    inherit gtk3;
+    updateScript = nix-update-script {
+      extraArgs = [
+        "--url"
+        "https://github.com/glide-browser/glide"
+      ];
+    };
   };
 
   meta = {
     description = "Fork of Firefox, focused on privacy, security and freedom (upstream binary release)";
     homepage = "https://librewolf.net";
     license = lib.licenses.mpl20;
-    maintainers = with lib.maintainers; [
-      azahi
-      eclairevoyant
-      dwrege
-    ];
     platforms = builtins.attrNames mozillaPlatforms;
     mainProgram = "glide";
     hydraPlatforms = [ ];
