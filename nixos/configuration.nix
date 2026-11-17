@@ -193,10 +193,12 @@ in
     feishin
 
 	# etc
-    texliveSmall
+    texliveFull
 
   # school
     kicad
+
+
   ];
 
   fonts.packages = with pkgs; [

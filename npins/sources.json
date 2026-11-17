@@ -22,16 +22,16 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8408642aa3035135fa6d70269dc93e0814e2a4f6",
-      "url": "https://github.com/feel-co/hjem/archive/8408642aa3035135fa6d70269dc93e0814e2a4f6.tar.gz",
-      "hash": "sha256-hmlUXxCk6On7Hrop/TyS3//dgI2BLvaN4TEsOq1ma+Y="
+      "revision": "2f56c85f80a52c23fb3e956119ca80975a2b9ceb",
+      "url": "https://github.com/feel-co/hjem/archive/2f56c85f80a52c23fb3e956119ca80975a2b9ceb.tar.gz",
+      "hash": "sha256-k/nDw1zTlCmhA2K3odt/gy4uDiS002x8Nc14lQxvpY8="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1107793.1d060086d60c/nixexprs.tar.xz",
-      "hash": "sha256-iNjybNORi/2+shilhMlkNr01UHWKOHRGzQyIyvobs9o="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1119549.d5cc68339997/nixexprs.tar.xz",
+      "hash": "sha256-bTKSclXJAmo9qdxPedTBHUGr8awPr4BrbOoOutJsYIc="
     }
   },
   "version": 8
